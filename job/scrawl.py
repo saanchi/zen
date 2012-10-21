@@ -27,6 +27,8 @@ class Crawl:
         meta = {}
         for tag in self.bold(soup):
             text = self.between_lines(tag)[0]
+            if self.skip(text):
+                continue
             if self.place(text):
                 typ = 'place'
             else:
@@ -60,8 +62,10 @@ class Crawl:
             if data['typ']== 'conversation':
                 try:
                     c, s = re.search('(.*)\r\n\r\n(.*)', data['dat']).groups()
-                    fscript.append({'typ': 'conversation', 'dat': self.clean(c)})
-                    fscript.append({'typ': 'scene', 'dat': self.clean(s)})
+                    if not self.skip(c):
+                        fscript.append({'typ': 'conversation', 'dat': self.clean(c)})
+                    if not self.skip(s):
+                        fscript.append({'typ': 'scene', 'dat': self.clean(s)})
                     continue
                 except Exception, e:
                     continue
@@ -69,6 +73,7 @@ class Crawl:
         return fscript
 
     def skip(self, text):
+        text = self.clean(text)
         if text.strip() == '\n' or text.strip() == '' or text.strip() == '.':
             return True
         return False
@@ -110,6 +115,6 @@ def main():
         fscript = c.find_scenes(script)
         # Call save to db
         corpus_save(fscript, title)
-        #pprint.pprint(fscript)
+        pprint.pprint(fscript)
 
 main()
