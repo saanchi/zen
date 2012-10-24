@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home</title>
+<link rel="shortcut icon" type="image/ico" href="favicon.ico">
+<link href="/css/common.css" rel="stylesheet" type="text/css" media="all">
+<link href="/css/home.css" rel="stylesheet" type="text/css" media="all">
+<style>
+.center {
+   width: 719px;
+   margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+<div class="hm_frm"><b>Where do you start from ?</b></div>
+<div class="atsl">
+    <input type="text" id="gi_dest_text" value="Saket ( Delhi - New Delhi, National Capital Territory Of Delhi )" onkeyup="return gi.suggest.getSuggest(event, this.value)" onfocus="this.value='';">
+    <input type="hidden" value="JFK" id="gi_destination" name="gi_destination">				
+</div>
+<div id="gi_suggest" class="dn"></div>
+</div>
+<script src="/js/home.js" type="text/javascript"></script>
+
+</body>
+</html>
